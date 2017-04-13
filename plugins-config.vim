@@ -253,12 +253,14 @@ let g:ycm_filetype_blacklist = {
 \ 'gitcommit' : 1,
 \ 'ctrlsf': 1,
 \ 'unite': 1,
+\ 'denite': 1,
 \}
 let g:ycm_filetype_specific_completion_to_disable = {
 \ 'tagbar' : 1,
 \ 'gitcommit' : 1,
 \ 'ctrlsf': 1,
 \ 'unite': 1,
+\ 'denite': 1,
 \}
 
 " deoplete.nvim
@@ -513,3 +515,90 @@ let g:Gitv_CustomMappings = {
 \  'delete': 'dd',
 \  'vdelete': 'dd',
 \}
+
+" denite.nvim
+let s:denite_options = {
+  \ 'default': {
+  \   'auto-resize':             'true',
+  \   'winheight':               20,
+  \   'mode':                    'insert',
+  \   'quit':                    'true',
+  \   'highlight_matched_char':  'MoreMsg',
+  \   'highlight_matched_range': 'MoreMsg',
+  \   'direction':               'dynamicbottom',
+  \   'prompt':                  '>',
+  \ }}
+" \   'direction':               'rightbelow',
+
+function! s:denite_profile(opts) abort
+  for fname in keys(a:opts)
+    for dopt in keys(a:opts[fname])
+      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
+    endfor
+  endfor
+endfunction
+
+call s:denite_profile(s:denite_options)
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs', [
+\  '.ropeproject/', '__pycache__/',
+\  '.DS_Store',
+\  '.hg/', '.git/', '.bzr/', '.svn/',
+\  'node_modules', 'bower_components',
+\])
+
+" buffer source
+call denite#custom#var('buffer', 'date_format', '%m-%d-%Y %H:%M:%S')
+
+" denite command
+if executable('ag')
+  let ag_config = ['ag', '--depth', '10', '--smart-case', '--follow', '--vimgrep', '--hidden', '--nocolor', '--nogroup', '-g', '']
+  call denite#custom#var('file', 'command', ag_config)
+  call denite#custom#var('file_rec', 'command', ag_config)
+  call denite#custom#var('directory_rec', 'command', ag_config)
+
+  " FIND and GREP COMMANDS
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--smart-case'])
+endif
+
+" enable unite menu compatibility
+call denite#custom#var('menu', 'unite_source_menu_compatibility', 1)
+
+" KEY MAPPINGS
+let s:insert_mode_mappings = [
+\   ['jk', '<denite:enter_mode:normal>', 'noremap'],
+\   ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+\   ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+\   ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+\   ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+\   ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+\   ['<Up>', '<denite:assign_previous_text>', 'noremap'],
+\   ['<Down>', '<denite:assign_next_text>', 'noremap'],
+\   ['<C-Y>', '<denite:redraw>', 'noremap'],
+\ ]
+
+let s:normal_mode_mappings = [
+\   ["'", '<denite:toggle_select_down>', 'noremap'],
+\   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+\   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+\   ['gg', '<denite:move_to_first_line>', 'noremap'],
+\   ['st', '<denite:do_action:tabopen>', 'noremap'],
+\   ['sg', '<denite:do_action:vsplit>', 'noremap'],
+\   ['sv', '<denite:do_action:split>', 'noremap'],
+\   ['q', '<denite:quit>', 'noremap'],
+\   ['r', '<denite:redraw>', 'noremap'],
+\ ]
+
+for s:m in s:insert_mode_mappings
+  call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
+endfor
+for s:m in s:normal_mode_mappings
+  call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
+endfor
+
+unlet s:m s:insert_mode_mappings s:normal_mode_mappings

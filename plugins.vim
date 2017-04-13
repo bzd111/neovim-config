@@ -11,6 +11,7 @@
 Plug 'lifepillar/vim-cheat40'
 
 "" ========
+
 Plug 'uguu-org/vim-matrix-screensaver', {'on': 'Matrix'}
 Plug 'matze/vim-move' " 移动选定段落 <A-k> <A-j>
 Plug 'MattesGroeger/vim-bookmarks'  " 书签管理器
@@ -31,6 +32,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeMirrorToggle', 'NERDTreeTa
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 "Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
 Plug 'shougo/unite.vim' "  search and display information from arbitrary sources like files, buffers, recently used files or registers.
+
+Plug 'Shougo/denite.nvim'
+Plug 'chemzqm/vim-easygit' | Plug 'chemzqm/denite-git'
+Plug 'junegunn/vim-emoji' | Plug 'pocari/vim-denite-emoji'
 
 "" brackets and tags matching
 " Plug 'luochen1990/rainbow'  " 括号颜色配对。暂不开启，会影响到其他语法着色

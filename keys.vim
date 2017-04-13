@@ -448,3 +448,24 @@ execute 'nnoremap '.tern_prefix.'ts' ':TernDefSplit<CR>'
 " execute 'nnoremap '.tern_prefix.'ttd' ':TernDefTab<CR>'
 execute 'nnoremap '.tern_prefix.'tr' ':TernRefs<CR>'
 execute 'nnoremap '.tern_prefix.'tR' ':TernRename<CR>'
+
+" denite.nvim
+nnoremap <leader>dq :Denite -resume<CR>
+nnoremap <leader>dj :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
+nnoremap <leader>dk :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
+nnoremap <leader>dw :DeniteCursorWord  -auto-resize line<CR>
+nnoremap <leader>db :Denite buffer<CR>
+nnoremap <leader>dc :Denite command<CR>
+nnoremap <leader>dC :Denite change<CR>
+nnoremap <leader>dc :Denite directory_rec<CR>
+nnoremap <leader>df :Denite file<CR>
+nnoremap <leader>dF :Denite file_rec<CR>
+nnoremap <leader>dt :Denite filetype<CR>
+nnoremap <leader>dl :Denite line<CR>
+nnoremap <leader>dm :Denite menu<CR>
+nnoremap <leader>dr :Denite register<CR>
+nnoremap <leader>do :Denite outline<CR>
+nnoremap <leader>dh :Denite help<CR>
+nnoremap <leader>dgc :Denite -mode=normal gitchanged<CR>
+nnoremap <leader>dgl :Denite -mode=normal gitlog<CR>
+nnoremap <leader>dgs :Denite -mode=normal gitstatus<CR>
