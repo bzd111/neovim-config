@@ -47,6 +47,7 @@ Plug 'ap/vim-css-color'  " 显示颜色
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ggVGc/vim-fuzzysearch', {'on': 'FuzzySearch'}
+Plug 'haya14busa/incsearch.vim', {'on': ['<Plug>(incsearch-forward)', '<Plug>(incsearch-backward)', '<Plug>(incsearch-stay)']}
 Plug 'henrik/vim-indexed-search'  " 显示搜索查找到第几个
 "Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim', {'on': ['<Plug>CtrlSFPrompt', '<Plug>CtrlSFVwordPath', 'CtrlSF']} " 项目内内容搜索

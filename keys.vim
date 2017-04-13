@@ -448,3 +448,8 @@ execute 'nnoremap '.tern_prefix.'ts' ':TernDefSplit<CR>'
 " execute 'nnoremap '.tern_prefix.'ttd' ':TernDefTab<CR>'
 execute 'nnoremap '.tern_prefix.'tr' ':TernRefs<CR>'
 execute 'nnoremap '.tern_prefix.'tR' ':TernRename<CR>'
+
+" incsearch.vim
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
